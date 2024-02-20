@@ -2,6 +2,8 @@ import { VoxelGrid } from "./voxel/VoxelGrid";
 import { PointCloud } from "./renderables/PointCloud";
 import { VoxelCloud } from "./renderables/VoxelCloud";
 import { LineSet } from "./renderables/LineSet";
+import { VideoFrame } from "./renderables/VideoFrame";
+import { Frustum } from "./renderables/Frustum";
 import { Line } from "./interfaces/Line.interface";
 export declare class Dataset {
     voxelGrid: VoxelGrid;
@@ -17,6 +19,12 @@ export declare class Dataset {
     boundingBoxes: {
         [name: string]: THREE.Object3D;
     };
+    videoFrames: {
+        [name: string]: VideoFrame;
+    };
+    Frustum: {
+        [name: string]: Frustum;
+    };
     constructor();
     get_object_meta(type: string, name: string, index: number): any;
     get_available_objects(): {
@@ -25,4 +33,6 @@ export declare class Dataset {
     add_point_cloud(name: string, points: number[][], normals: number[][], colors: number[][], meta?: any[], interactive?: boolean, grid?: boolean): void;
     add_line_set(name: string, lines: Line[], colors: number[][], meta: any[]): void;
     add_heatmap(name: string, color: number[]): void;
+    add_video(name: string, video: HTMLVideoElement[], width: number, height: number, start: number, position: number[], meta: any[]): void;
+    add_frustum(name: string, lines: number[][][], meta: any[]): void;
 }

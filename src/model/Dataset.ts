@@ -8,6 +8,8 @@ import * as d3 from 'd3';
 import { LineSet } from "./renderables/LineSet";
 import { Line } from "./interfaces/Line.interface";
 import { Renderable } from "./renderables/Renderable";
+import {VideoFrame} from "./renderables/VideoFrame";
+import {Frustum} from "./renderables/Frustum";
 
 export class Dataset {
 
@@ -17,6 +19,8 @@ export class Dataset {
     public pointClouds: { [name: string]: PointCloud } = {};
     public heatmaps: { [name: string]: VoxelCloud } = {};
     public lineSets: { [name: string]: LineSet } = {};
+    public videoFrames:  { [name: string]: VideoFrame } = {};
+    public frustum: {[name: string]: Frustum } = {};
 
     // TODO: refactor these bounding boxes. It should have its own class under renderables folder
     public boundingBoxes: { [name: string]: THREE.Object3D } = {}
@@ -40,6 +44,8 @@ export class Dataset {
             'heatmaps': Object.values( this.heatmaps ).map( (object: Renderable) => object.id ),
             'lineSets': Object.values( this.lineSets ).map( (object: Renderable) => object.id ),
             'boundingBoxes': Object.values( this.boundingBoxes ).map( (object: THREE.Object3D) => object.name ),
+            'videoFrames': Object.values( this.videoFrames ).map( (object: Renderable) => object.id ),
+            'frustum': Object.values( this.frustum ).map( (object: Renderable) => object.id ), 
         } 
 
         return objects
@@ -66,7 +72,6 @@ export class Dataset {
         // indexing
         this.pointClouds[name] = pointCloud; 
         this.voxelGrid.update_voxel_grid( name, points );
-
     }
 
     public add_line_set( name: string, lines: Line[], colors: number[][], meta: any[] ){
@@ -113,5 +118,15 @@ export class Dataset {
 
     }
 
+    public add_video(name: string, video: HTMLVideoElement[], width: number, height: number, start: number, position: number[], meta: any[]){
+        const videoFrame: VideoFrame = new VideoFrame(name, video, width, height, start, position, meta)
+        this.videoFrames[name] = videoFrame;
+
+    }
+
+    public add_frustum( name: string,  lines: number[][][], meta: any[]){
+        const frustum: Frustum = new Frustum(name, lines, meta)
+        this.frustum[name] = frustum;
+    }
 
 }

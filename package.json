@@ -1,7 +1,7 @@
 {
   "name": "egocloud",
   "version": "1.0.0",
-  "description": "",
+  "description": "Interactive 3D point cloud visualizer tailored to support the analysis of data collected by AR headsets such as the HoloLens2. Egocloud runs in the core of [ARGUS](https://github.com/).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -23,7 +23,7 @@
   "devDependencies": {
     "html-webpack-plugin": "^5.5.1",
     "ts-loader": "^9.4.2",
-    "typescript": "^5.0.4",
+    "typescript": "^5.3.3",
     "webpack": "^5.80.0",
     "webpack-cli": "^5.0.2",
     "webpack-dev-server": "^4.13.3"
@@ -31,10 +31,13 @@
   "dependencies": {
     "@types/d3": "^7.4.1",
     "@types/three": "^0.151.0",
+    "common-js": "^0.3.8",
     "d3": "^7.8.5",
     "i": "^0.3.7",
+    "mathjs": "^12.3.2",
     "npm": "^9.6.5",
     "pub-sub-es": "^2.0.1",
-    "three": "^0.151.3"
+    "three": "^0.151.3",
+    "three.meshline": "^1.4.0"
   }
 }

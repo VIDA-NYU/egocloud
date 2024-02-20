@@ -25,6 +25,7 @@ export class SceneManager {
 
     public highlight_object( objectType: string, position: number[] | Line ): void {
         this.sceneHighlights.highlight_object( objectType, position, this.scene );
+        console.log("TEST", this.scene.getObjectByName( "PointLight" ));
     }
 
     public clear_highlights(): void {
@@ -68,7 +69,6 @@ export class SceneManager {
         if( currentObject ){
             currentObject.visible = visibility;
         }
-    
     }
 
     public set_style( name: string, style: string, value: number ): void {
@@ -91,7 +91,7 @@ export class SceneManager {
                 const box = new THREE.BoxHelper( currentRenderable, '#000000' );
                 box.name = `${key}-boundingbox`
                 this.dataset.boundingBoxes[`${key}-boundingbox`] = box;
-                this.scene.add( box );
+                //this.scene.add( box );
             }
 
             // lines
@@ -105,6 +105,19 @@ export class SceneManager {
                 const currentRenderable: Object3D = value.get_renderables();
                 this.scene.add( currentRenderable );
             }
+
+            //video
+            for (let [key, value] of Object.entries(this.dataset.videoFrames)) {
+                const currentRenderable: Object3D = value.get_renderables();
+                this.scene.add( currentRenderable );
+            }
+
+            //frustum
+            for (let [key, value] of Object.entries(this.dataset.frustum)) {
+                const currentRenderable: Object3D = value.get_renderables();
+                this.scene.add( currentRenderable );
+            }
+
 
         }
 
